@@ -70,15 +70,26 @@ usernames = []
 
 # Function to add a new password 
 def add_password():
-    """
-    Add a new password to the password manager.
+    website = input("Website: ")
+    username = input("Username: ")
 
-    This function should prompt the user for the website, username,  and password and store them to lits with same index. Optionally, it should check password strengh with the function is_strong_password. It may also include an option for the user to
-    generate a random strong password by calling the generate_password function.
+    use_generator = input("Generate strong password automatically? (y/n): ")
 
-    Returns:
-        None
-    """
+    if use_generator.lower() == "y":
+        password = generate_password()
+        print("Generated password:", password)
+    else:
+        password = input("Password: ")
+        if not is_strong_password(password):
+            print("Warning: password is weak.")
+
+    encrypted_pw = caesar_encrypt(password, 3)
+
+    websites.append(website)
+    usernames.append(username)
+    encrypted_passwords.append(encrypted_pw)
+
+    print("Password added!")
 
 # Function to retrieve a password 
 def get_password():
